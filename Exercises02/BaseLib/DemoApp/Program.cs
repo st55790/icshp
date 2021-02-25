@@ -63,11 +63,23 @@ namespace DemoApp
 
         private static void SortDesc()
         {
+            if (array == null || array.Length == 0)
+            {
+                Console.WriteLine("Pole je prázdné!");
+                return;
+            }
+
             array = array.OrderByDescending(x => x).ToArray();
         }
 
         private static void GetLastOccurenceInArray()
         {
+            if (array == null || array.Length == 0)
+            {
+                Console.WriteLine("Pole je prázdné!");
+                return;
+            }
+
             int choice = Reading.ReadInt("Zadej hledané číslo");
             int index = -1;
             for (int i = 0; i < array.Length; i++)
@@ -89,6 +101,12 @@ namespace DemoApp
 
         private static void GetFirstOccurenceInArray()
         {
+            if (array == null || array.Length == 0)
+            {
+                Console.WriteLine("Pole je prázdné!");
+                return;
+            }
+
             int choice = Reading.ReadInt("Zadej hledané číslo");
             for (int i = 0; i < array.Length; i++) {
                 if (array[i] == choice) {
@@ -101,16 +119,32 @@ namespace DemoApp
 
         private static void GetMin()
         {
+            if (array == null || array.Length == 0)
+            {
+                Console.WriteLine("Pole je prázdné!");
+                return;
+            }
+
             Console.WriteLine("Nejmenší prvek je: " + array.Min());
         }
 
         private static void SortAsc()
         {
+            if (array == null || array.Length == 0)
+            {
+                Console.WriteLine("Pole je prázdné!");
+                return;
+            }
             array = array.OrderBy(x => x).ToArray();
         }
 
         private static void PrintArray()
         {
+            if (array == null || array.Length == 0) {
+                Console.WriteLine("Pole je prázdné!");
+                return;
+            }
+           
             for (int i = 0; i < array.Length; i++)
             {
                 Console.WriteLine(i + ". ->" + array[i]);
