@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtraMath.cs" />
+    <Compile Include="MathConvertor.cs" />
     <Compile Include="Reading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

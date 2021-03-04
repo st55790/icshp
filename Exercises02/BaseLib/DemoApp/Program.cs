@@ -9,7 +9,11 @@ namespace DemoApp
         public static int[] array;
         static void Main(string[] args)
         {
-            ShowMenu();
+            //ShowMenu();
+            Console.WriteLine(MathConvertor.BinaryToDecimal(1000000));
+            Console.WriteLine(MathConvertor.DecimalToBinary(64));
+            Console.WriteLine(MathConvertor.DecimalToRome(1997));
+            Console.WriteLine(MathConvertor.RomeToDecimal("MCMXCVII"));
             Console.ReadKey();
         }
 
