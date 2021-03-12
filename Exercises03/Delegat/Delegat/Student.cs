@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Delegat
 {
-    enum Faculty { 
+    public enum Faculty { 
         FES,
         FF,
         FEI,
         FCHT
     }
-    class Student
+    public class Student
     {
         private string name;
         private int number;

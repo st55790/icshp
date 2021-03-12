@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Delegat
 {
-    class Students
+    public class Students
     {
         public Students() {
             ListStudents = new List<Student>();
