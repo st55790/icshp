@@ -40,6 +40,8 @@
             this.ColGoals = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColClub = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.buttonLoad = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -156,9 +158,31 @@
             this.dataGridView.TabIndex = 0;
             this.dataGridView.Text = "dataGridView1";
             // 
+            // buttonLoad
+            // 
+            this.buttonLoad.Location = new System.Drawing.Point(537, 249);
+            this.buttonLoad.Name = "buttonLoad";
+            this.buttonLoad.Size = new System.Drawing.Size(125, 23);
+            this.buttonLoad.TabIndex = 3;
+            this.buttonLoad.Text = "Load";
+            this.buttonLoad.UseVisualStyleBackColor = true;
+            this.buttonLoad.Click += new System.EventHandler(this.ButtonLoad_Click);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(537, 278);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(125, 23);
+            this.buttonSave.TabIndex = 4;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            // 
             // ChampionsLeague
             // 
             this.ClientSize = new System.Drawing.Size(669, 383);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonRegistration);
@@ -188,8 +212,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonLoad;
+        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button buttonCancel;

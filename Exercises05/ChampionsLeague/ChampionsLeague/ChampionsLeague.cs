@@ -1,5 +1,6 @@
 ﻿using ChampionsLeague.Entity;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ChampionsLeague
@@ -119,5 +120,30 @@ namespace ChampionsLeague
             Application.Exit();
         }
 
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            SaveForm saveForm = new SaveForm(allPlayers);
+            saveForm.ShowDialog();
+        }
+
+        private void ButtonLoad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            string line = "";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                StreamReader stream = new StreamReader(openFileDialog.FileName);
+                while ((line = stream.ReadLine()) != null) {
+                    string[] data = line.Split(';');
+                    Player player = new Player();
+                    player.Name = data[1];
+                    player.Club = (FootballClub)Enum.Parse(typeof(FootballClub), data[0]);
+                    player.Goals = int.Parse(data[2]);
+                    allPlayers.Add(player);
+                }
+                stream.Close();
+            }
+            RefreshGrid();
+        }
     }
 }
