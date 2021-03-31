@@ -41,7 +41,7 @@ namespace ChampionsLeague
                 MessageBox.Show($"Some was wrong?! \n\n{ex.ToString()}");
             }
 
-                   
+
         }
 
         private void buttonStorno_Click(object sender, EventArgs e)

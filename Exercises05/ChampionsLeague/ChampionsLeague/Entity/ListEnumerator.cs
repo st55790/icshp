@@ -21,7 +21,8 @@ namespace ChampionsLeague.Entity
                 next = first;
                 start = false;
             }
-            else {
+            else
+            {
                 next = next.Next;
             }
             return next != null;

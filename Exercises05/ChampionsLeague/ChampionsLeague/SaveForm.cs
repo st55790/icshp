@@ -1,11 +1,6 @@
 ﻿using ChampionsLeague.Entity;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ChampionsLeague
@@ -22,8 +17,10 @@ namespace ChampionsLeague
 
         private void LoadTeams()
         {
-            foreach (FootballClub fc in (FootballClub[])Enum.GetValues(typeof(FootballClub))) {
-                if (FootballClubInfo.GetClubName(fc) != "") { 
+            foreach (FootballClub fc in (FootballClub[])Enum.GetValues(typeof(FootballClub)))
+            {
+                if (FootballClubInfo.GetClubName(fc) != "")
+                {
                     checkedListBox.Items.Add(FootballClubInfo.GetClubName(fc));
                 }
             }
@@ -39,15 +36,18 @@ namespace ChampionsLeague
             saveFileDialog.FileName = "ChampiopnsLeagueStrikers.txt";
             saveFileDialog.DefaultExt = "txt";
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK) {
-                if ((stream = saveFileDialog.OpenFile()) != null) {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if ((stream = saveFileDialog.OpenFile()) != null)
+                {
                     StreamWriter streamWriter = new StreamWriter(stream);
                     for (int i = 0; i < checkedListBox.Items.Count; i++)
                     {
                         for (int j = 0; j < players.CountPlayers; j++)
                         {
                             Player tmpPlayer = players[j];
-                            if (FootballClubInfo.GetClubName(tmpPlayer.Club) == checkedListBox.Items[i].ToString() && checkedListBox.GetItemChecked(i)){
+                            if (FootballClubInfo.GetClubName(tmpPlayer.Club) == checkedListBox.Items[i].ToString() && checkedListBox.GetItemChecked(i))
+                            {
                                 streamWriter.WriteLine($"{tmpPlayer.Club};{tmpPlayer.Name};{tmpPlayer.Goals}");
                             }
                         }

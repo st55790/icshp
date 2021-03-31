@@ -26,7 +26,8 @@ namespace ChampionsLeague
             AddPlayer addForm = new AddPlayer(player);
             if (addForm.ShowDialog() == DialogResult.OK)
             {
-                if (addForm.NewPlayer != null) { 
+                if (addForm.NewPlayer != null)
+                {
                     player = addForm.NewPlayer;
                     allPlayers.Add(player);
                 }
@@ -75,8 +76,9 @@ namespace ChampionsLeague
                     AddPlayer editForm = new AddPlayer(player);
                     if (editForm.ShowDialog() == DialogResult.OK)
                     {
-                        if (editForm.NewPlayer != null) { 
-                            player = editForm.NewPlayer;                           
+                        if (editForm.NewPlayer != null)
+                        {
+                            player = editForm.NewPlayer;
                         }
                         allPlayers.Add(player);
                     }
@@ -131,9 +133,11 @@ namespace ChampionsLeague
             OpenFileDialog openFileDialog = new OpenFileDialog();
             string line = "";
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
                 StreamReader stream = new StreamReader(openFileDialog.FileName);
-                while ((line = stream.ReadLine()) != null) {
+                while ((line = stream.ReadLine()) != null)
+                {
                     string[] data = line.Split(';');
                     Player player = new Player();
                     player.Name = data[1];

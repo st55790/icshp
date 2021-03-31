@@ -18,20 +18,24 @@ namespace ChampionsLeague.Entity
 
         public bool IsReadOnly => false;
 
-        public class NodeList {
+        public class NodeList
+        {
             public object Data { get; set; }
             public NodeList Next { get; set; }
             public NodeList Previous { get; set; }
 
-            public NodeList(object data, NodeList next, NodeList previous) {
+            public NodeList(object data, NodeList next, NodeList previous)
+            {
                 Data = data;
                 Next = next;
                 Previous = previous;
             }
         }
 
-        public object this[int index] {
-            get {
+        public object this[int index]
+        {
+            get
+            {
                 if (index >= count || index < 0)
                 {
                     throw new IndexOutOfRangeException();
@@ -44,15 +48,17 @@ namespace ChampionsLeague.Entity
                 {
                     return last.Data;
                 }
-                else {
+                else
+                {
                     NodeList actual = first;
-                    for (int i = 0; i < index; i++) {
+                    for (int i = 0; i < index; i++)
+                    {
                         actual = actual.Next;
                     }
                     return actual.Data;
                 }
             }
-            set => Insert(index, this); 
+            set => Insert(index, this);
         }
 
         public int Add(object value)
@@ -62,7 +68,8 @@ namespace ChampionsLeague.Entity
                 first = new NodeList(value, null, null);
                 last = first;
             }
-            else {
+            else
+            {
                 NodeList tmp = new NodeList(value, null, last);
                 last.Next = tmp;
                 last = tmp;
@@ -80,8 +87,10 @@ namespace ChampionsLeague.Entity
         public bool Contains(object value)
         {
             NodeList actual = first;
-            while (actual.Next != null) {
-                if (actual.Data == value) {
+            while (actual.Next != null)
+            {
+                if (actual.Data == value)
+                {
                     return true;
                 }
                 actual = actual.Next;
@@ -122,7 +131,8 @@ namespace ChampionsLeague.Entity
 
         public void Insert(int index, object value)
         {
-            if (count < index || index < 0) {
+            if (count < index || index < 0)
+            {
                 throw new IndexOutOfRangeException();
             }
             if (index == 0)
@@ -136,7 +146,8 @@ namespace ChampionsLeague.Entity
             {
                 Add(value);
             }
-            else {
+            else
+            {
                 NodeList actual = first;
                 for (int i = 0; i < index; i++)
                 {
@@ -147,7 +158,7 @@ namespace ChampionsLeague.Entity
                 actual = new NodeList(value, tmp, tmp.Previous);
                 tmp.Previous.Next = actual;
                 tmp.Next.Previous = actual;
-                count++;    
+                count++;
             }
         }
 
@@ -169,31 +180,36 @@ namespace ChampionsLeague.Entity
                 last.Next = null;
                 count--;
             }
-            else {
+            else
+            {
                 NodeList actual = first;
-                while (actual != null) {
-                    if (actual.Data == value) {
+                while (actual != null)
+                {
+                    if (actual.Data == value)
+                    {
                         actual.Previous.Next = actual.Next;
                         actual.Next.Previous = actual.Previous;
                         count--;
                     }
                     actual = actual.Next;
                 }
-            
+
             }
-            
+
         }
 
         public void RemoveAt(int index)
         {
-            if (index < 0 || index > count) {
+            if (index < 0 || index > count)
+            {
                 throw new IndexOutOfRangeException();
             }
 
             NodeList tmp = first;
             for (int i = 0; i < count; i++)
             {
-                if (i == index) {
+                if (i == index)
+                {
                     Remove(tmp.Data);
                 }
                 tmp = tmp.Next;
