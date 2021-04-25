@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SemestralniPrace
@@ -11,7 +12,7 @@ namespace SemestralniPrace
         private bool left, right, up, down;
         private int zombiesCount = 1;
         private int playerHealth = 100;
-        private int playerSpeed = 5;
+        private int playerSpeed = 3;
         private int enemySpeed = 1;
         private int score = 0;
         private string facing = "right";
@@ -518,6 +519,14 @@ namespace SemestralniPrace
             bonusList.Add(bonus.BonusPictureBox);
             this.Controls.Add(bonus.BonusPictureBox);
             player.BringToFront();
+
+            if (bonusList.Count > 10) {
+                PictureBox pictureBox = bonusList.First();
+
+                this.Controls.Remove(pictureBox);
+                (pictureBox).Dispose();
+                bonusList.Remove(pictureBox);
+            }
         }
 
         //Read data from file and create obstacles map OK!
