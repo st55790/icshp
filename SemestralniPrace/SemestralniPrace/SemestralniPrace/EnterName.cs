@@ -23,6 +23,9 @@ namespace SemestralniPrace
         private async void Button1_Click(object sender, EventArgs e)
         {
             string name = textBox1.Text;
+            if (String.IsNullOrEmpty(label1.Text) || name == ""){
+                name = "EMPTY";
+            }
             int score = int.Parse(label1.Text);
             using StreamWriter file = new(@"files/score.txt", append: true);
             await file.WriteLineAsync($"{name};{score}");

@@ -45,21 +45,60 @@ namespace SemestralniPrace
             lives.Text = $"{playerHealth} HP";
 
             //Player movement OK!
-            if (up == true && player.Top > 0)
-            {
-                player.Top -= playerSpeed;
+            if (!CollisionWithBlock()) { 
+                if (up == true && player.Top > 0)
+                {
+                    player.Top -= playerSpeed;
+                }
+                if (down == true && player.Top < this.ClientSize.Height - player.Height)
+                {
+                    player.Top += playerSpeed;
+                }
+                if (right == true && player.Left < this.ClientSize.Width - player.Width)
+                {
+                    player.Left += playerSpeed;
+                }
+                if (left == true && player.Left > 0)
+                {
+                    player.Left -= playerSpeed;
+                }
             }
-            if (down == true && player.Top < this.ClientSize.Height - player.Height)
+            if (CollisionWithBlock())
             {
-                player.Top += playerSpeed;
-            }
-            if (right == true && player.Left < this.ClientSize.Width - player.Width)
-            {
-                player.Left += playerSpeed;
-            }
-            if (left == true && player.Left > 0)
-            {
-                player.Left -= playerSpeed;
+                foreach (Control block in this.Controls)
+                {
+                    if (block is PictureBox && (string)block.Tag == "block")
+                    {
+                        if (player.Bounds.IntersectsWith(block.Bounds))
+                        {
+                            //Player leva, block prava
+                            if (player.Left <= block.Left + block.Width && player.Left > block.Left + block.Width/2)//40
+                            {
+                                player.Left = block.Left + block.Width + 1;
+                                
+                            }
+                            //player prava, block leva
+                            else if (player.Left + player.Width >= block.Left && player.Left + player.Width < block.Left + block.Width/2)//10
+                            {
+                                player.Left = block.Left - player.Width - 1;
+                                
+                            }
+                            //player top, block bot
+                            else if (player.Top <= block.Top + block.Height && player.Top > block.Top + block.Height/2)//40
+                            {
+
+                                player.Top = block.Top + block.Height + 1;
+                                
+                            }
+                            //player bot, block top
+                            else if (player.Top + player.Height >= block.Top && player.Top + player.Height < block.Top + block.Height/2)//10
+                            {
+                                player.Top = block.Top - player.Height - 1;
+                                
+                            }
+                        }
+                    }
+                }
             }
 
             //Collision player with bonus
@@ -198,81 +237,11 @@ namespace SemestralniPrace
 
             }
 
-            //Collision player with block KO! 
+            //Collision zombie with block OK! 
             foreach (Control block in this.Controls)
             {
                 if (block is PictureBox && (string)block.Tag == "block")
                 {
-                    if (player.Bounds.IntersectsWith(block.Bounds))
-                    {
-                        //Player leva, block prava
-                        if (player.Left <= block.Left + block.Width && player.Left >= block.Left + 40)
-                        {
-                            player.Left = block.Left + block.Width;
-                        }
-                        //player prava, block leva
-                        else if (player.Left + player.Width >= block.Left && player.Left + player.Width <= block.Left + 10)
-                        {
-                            player.Left = block.Left - player.Width;
-                        }
-                        //player top, block bot
-                        else if (player.Top <= block.Top + block.Height && player.Top >= block.Top + 40)
-                        {
-
-                            player.Top = block.Top + block.Height;
-                        }
-                        //player bot, block top
-                        else if (player.Top + player.Height >= block.Top && player.Top + player.Height <= block.Top + 10)
-                        {
-                            player.Top = block.Top - block.Height;
-                        }
-                        //Again same block, bcs player can move through block, but still can
-                        else {
-                            if (player.Left <= block.Left + block.Width && player.Left >= block.Left)
-                            {
-                                player.Left = block.Left + block.Width;
-                            }
-                            //player prava, block leva
-                            else if (player.Left + player.Width >= block.Left && player.Left + player.Width <= block.Left)
-                            {
-                                player.Left = block.Left - player.Width;
-                            }
-                            //player top, block bot
-                            else if (player.Top <= block.Top + block.Height && player.Top >= block.Top)
-                            {
-
-                                player.Top = block.Top + block.Height;
-                            }
-                            //player bot, block top
-                            else if (player.Top + player.Height >= block.Top && player.Top + player.Height <= block.Top)
-                            {
-                                player.Top = block.Top - block.Height;
-                            }
-                        }
-
-                        ////Player leva, block prava
-                        //if (player.Left < block.Left + block.Width && player.Left > block.Left + block.Width / 3 * 2)
-                        //{
-                        //    player.Left = block.Left + block.Width;
-                        //}
-                        ////player prava, block leva
-                        //else if (player.Left + player.Width > block.Left && player.Left + player.Width < block.Left + block.Width / 3)
-                        //{
-                        //    player.Left = block.Left - player.Width;
-                        //}
-                        ////player top, block bot
-                        //else if (player.Top < block.Top + block.Height && player.Top > block.Top + block.Height / 3 * 2)
-                        //{
-
-                        //    player.Top = block.Top + block.Height;
-                        //}
-                        ////player bot, block top
-                        //else if (player.Top + player.Height > block.Top && player.Top + player.Height < block.Top + block.Height / 3)
-                        //{
-                        //    player.Top = block.Top - block.Height;
-                        //}
-                    }
-
                     foreach (Control bullet in this.Controls)
                     {
                         if (bullet is PictureBox && (string)bullet.Tag == "bullet" && block is PictureBox && (string)block.Tag == "block")
@@ -293,23 +262,23 @@ namespace SemestralniPrace
 
                             if (block.Bounds.IntersectsWith(zombie.Bounds))
                             {
-                                ////Leva hrac + prava blok
-                                if (zombie.Left < block.Right && zombie.Left > block.Right - block.Width)
+                                //Leva zombie + prava blok
+                                if (zombie.Left <= block.Left + block.Width && zombie.Left > block.Left + block.Width/2)
                                 {
-                                    zombie.Left = block.Right;
+                                    zombie.Left = block.Left + block.Width;
                                 }
-                                ////Prava hrac + leva blok
-                                else if (zombie.Left + zombie.Width > block.Left && zombie.Left + zombie.Width < block.Right)
+                                //Prava zombie + leva blok
+                                else if (zombie.Left + zombie.Width >= block.Left && zombie.Left + zombie.Width < block.Left + block.Width/2)
                                 {
                                     zombie.Left = block.Left - zombie.Width;
                                 }
-                                ////Top hrac + spodek blok
-                                else if (zombie.Top < block.Top + block.Height && zombie.Top > block.Top + block.Height)
+                                //Top zombie + spodek blok
+                                else if (zombie.Top <= block.Top + block.Height && zombie.Top > block.Top + block.Height/2)
                                 {
                                     zombie.Top = block.Top + block.Height;
                                 }
-                                //Spodek hrac + top blok
-                                else if (zombie.Top + zombie.Height > block.Top && player.Top + zombie.Height > block.Top)
+                                //Spodek zombie + top blok
+                                else if (zombie.Top + zombie.Height >= block.Top && zombie.Top + zombie.Height < block.Top + block.Height/2)
                                 {
                                     zombie.Top = block.Top - zombie.Height;
                                 }
@@ -318,6 +287,22 @@ namespace SemestralniPrace
                     }
                 }
             }
+        }
+
+        private bool CollisionWithBlock()
+        {
+            foreach (Control block in this.Controls)
+            {
+                if (block is PictureBox && (string)block.Tag == "block")
+                {
+                    if (player.Bounds.IntersectsWith(block.Bounds))
+                    {
+                        return true;
+                    }
+
+                }
+            }
+            return false;
         }
 
         private void SpawnZombies()
