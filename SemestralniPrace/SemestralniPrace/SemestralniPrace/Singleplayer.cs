@@ -22,7 +22,7 @@ namespace SemestralniPrace
         private List<PictureBox> bonusList = new List<PictureBox>();
         private bool pause = false;
         private delegate void Gameover();
-        private event Gameover gameoverEvent;
+        private event Gameover gameoverCallBack;
 
         public Singleplayer()
         {
@@ -30,7 +30,7 @@ namespace SemestralniPrace
             SetPause();
             RestartGame();
             LoadMap();
-            gameoverEvent += CheckIsPlayerAlive;
+            gameoverCallBack += CheckIsPlayerAlive;
         }
 
         private void SetPause()
@@ -215,7 +215,7 @@ namespace SemestralniPrace
                         zombies.Remove((PictureBox)zombie);
 
                         //CheckIsPlayerAlive();
-                        gameoverEvent?.Invoke();
+                        gameoverCallBack?.Invoke();
                     }
                 }
 
@@ -534,7 +534,7 @@ namespace SemestralniPrace
         {
             try
             {
-                string text = "TEST";
+                string text = "";
                 using (var sr = new StreamReader("files/terrain.txt"))
                 {
                     text = sr.ReadToEnd();
